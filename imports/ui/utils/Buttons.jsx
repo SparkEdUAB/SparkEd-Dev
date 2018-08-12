@@ -17,8 +17,8 @@ export const Button = ({
 
 Button.propTypes = {
   actionFunc: PropTypes.func,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   backgroundColor: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   extraClass: PropTypes.string,
 };

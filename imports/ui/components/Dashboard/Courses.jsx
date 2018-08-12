@@ -15,6 +15,7 @@ import MainModal from '../../../ui/modals/MainModal.jsx';
 import { closeModal } from '../../../ui/modals/methods.js';
 import * as config from '../../../../config.json';
 import { formatText } from '../../utils/utils';
+import { Button } from 'antd';
 
 export const T = i18n.createComponent();
 
@@ -419,6 +420,11 @@ export class Courses extends Component {
                   <T>common.actions.new</T>
                 </button>
               </a>
+            </div>
+            <div className="col m3">
+            
+            <Button type="primary">Primary</Button>
+              
             </div>
           </div>
 
