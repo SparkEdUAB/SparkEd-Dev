@@ -10,6 +10,7 @@ const MainModal = (props) => {
   if (!props.show) {
     return null;
   }
+  // omit the color for now
   return (
     <ThemeContext.Consumer>
       {color => (
@@ -23,7 +24,7 @@ const MainModal = (props) => {
                   <div className="modal-footer">
                     <Button
                       title={props.confirm}
-                      backgroundColor={color.main}
+                      backgroundColor={''}
                       name={props.confirm}
                     />
                     <a href="" onClick={props.onClose} className="btn grey darken-3 right">
