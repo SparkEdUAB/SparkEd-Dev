@@ -15,28 +15,10 @@ import MainModal from "../../../ui/modals/MainModal.jsx";
 import { closeModal } from "../../../ui/modals/methods.js";
 import * as config from "../../../../config.json";
 import { formatText } from "../../utils/utils";
-import { Button, Row, Col, Table } from "antd";
+import { Button, Row, Col, Table, Icon } from "antd";
 import { ThemeContext } from "../../containers/AppWrapper";
 
-const columns = [
-  {
-    title: "Course",
-    dataIndex: "name"
-  },
-  {
-    title: "Code",
-    dataIndex: "code"
-  },
-  {
-    title: 'created At',
-    dataIndex:'createdAt',
-    render: date => <span>{date.toDateString()} </span>
-  }
-];
 
-getRecord = (record) => {
-  console.log(record);
-}
 
 export const T = i18n.createComponent();
 
@@ -56,9 +38,12 @@ export class Coursess extends Component {
       owner: "",
       ids: [],
       table_title: "Course",
-      sub_title: "Unit"
+      sub_title: "Unit",
+      item: ''
     };
   }
+
+
 
   componentDidMount() {
     Session.set("course", " active");
@@ -333,6 +318,11 @@ export class Coursess extends Component {
     this.setState({ selectedRowKeys });
   };
 
+editCourse = (e, id) => {
+
+   this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+}
+
   render() {
     const {
       isOpen,
@@ -377,6 +367,29 @@ export class Coursess extends Component {
       ],
       onSelection: this.onSelection
     };
+
+    const columns = [
+            {
+              title: "Course",
+              dataIndex: "name"
+            },
+            {
+              title: "Code",
+              dataIndex: "code"
+            },
+            {
+              title: 'created At',
+              dataIndex:'createdAt',
+              render: date => <span>{date.toDateString()} </span>
+            },
+            {
+              title: 'Edit',
+              dataIndex:'_id',
+              render: id => <span onClick={e => this.editCourse(e, id)} ><Icon type="edit" /> </span>
+            }
+          ];
+
+
     return (
       <ThemeContext.Consumer>
         {color => (
