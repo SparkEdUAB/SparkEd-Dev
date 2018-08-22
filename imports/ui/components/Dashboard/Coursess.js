@@ -26,12 +26,17 @@ const columns = [
   {
     title: "Code",
     dataIndex: "code"
+  },
+  {
+    title: 'created At',
+    dataIndex:'createdAt',
+    render: date => <span>{date.toDateString()} </span>
   }
-  //   {
-  //     title: 'Address',
-  //     dataIndex: 'address',
-  //   }
 ];
+
+getRecord = (record) => {
+  console.log(record);
+}
 
 export const T = i18n.createComponent();
 
@@ -220,7 +225,7 @@ export class Coursess extends Component {
         year = target.year.value;
         Meteor.call(
           "course.edit",
-          modalIdentifier,
+          this.state.selectedRowKeys[0],
           course,
           courseCode,
           year,
@@ -443,8 +448,7 @@ export class Coursess extends Component {
                     id="year"
                     type="text"
                     pattern="[1-9]"
-                    className="validate clear"
-                    required
+                    className=" clear"
                     name="year"
                     title={`${new_title} Year eg: 1-12`}
                   />
@@ -474,6 +478,15 @@ export class Coursess extends Component {
                   onClick={e => this.toggleEditModal("add", e)}
                 >
                   <T>common.actions.new</T>
+                </Button>
+              </Col>
+              <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+                <Button
+                  type="primary"
+                  icon="edit"
+                  onClick={e => this.toggleEditModal("edit", e)}
+                >
+                  <T>common.actions.edit</T>
                 </Button>
               </Col>
             </Row>
