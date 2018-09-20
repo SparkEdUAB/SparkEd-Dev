@@ -1,5 +1,7 @@
 # SparkEd
 
+[![Build Status](https://travis-ci.org/SparkEdUAB/SparkEd-Dev.svg?branch=master)](https://travis-ci.org/SparkEdUAB/SparkEd-Dev)
+
 > Software for organizing and presenting educational and training content for delivery on most platforms.
 
 To get started check out [our wiki](https://github.com/SparkEdUAB/SparkEd/wiki)

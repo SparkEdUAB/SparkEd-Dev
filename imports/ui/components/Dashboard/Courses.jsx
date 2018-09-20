@@ -15,6 +15,7 @@ import MainModal from '../../../ui/modals/MainModal.jsx';
 import { closeModal } from '../../../ui/modals/methods.js';
 import * as config from '../../../../config.json';
 import { formatText } from '../../utils/utils';
+import { Button, Row, Col } from 'antd';
 
 export const T = i18n.createComponent();
 
@@ -392,35 +393,37 @@ export class Courses extends Component {
         </MainModal>
 
         <div className="col m9 s11">
-          <div className="">
-            <h4>
-              {' '}
+          <Row>
+          <h4>
+
               <T>common.manage.manage</T> {new_title}
-            </h4>{' '}
-            {/* Add */}
-          </div>
-          <div className="row">
-            <div className="col m3">
-              <button
-                className="btn red darken-3 fa fa-remove"
+            </h4>
+          </Row>
+          <Row>
+          <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          
+          <Button 
+                type="danger" 
+                icon="close" 
                 onClick={e => this.toggleEditModal('del', e)}
               >
-                {' '}
-                <T>common.actions.delete</T>
-              </button>
-            </div>
-            <div className="col m3">
-              <a href="">
-                <button
-                  className="btn green darken-4 fa fa-plus"
-                  onClick={e => this.toggleEditModal('add', e)}
-                >
-                  {' '}
-                  <T>common.actions.new</T>
-                </button>
-              </a>
-            </div>
-          </div>
+              <T>common.actions.delete</T>
+              </Button>
+          
+          </Col>
+          <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          
+          <Button 
+              type="primary" 
+              icon="plus" 
+              onClick={e => this.toggleEditModal('add', e)}
+              >
+              <T>common.actions.new</T>
+              </Button>
+          </Col>
+        </Row>
+
+
 
           <table className="highlight">
             <thead>
