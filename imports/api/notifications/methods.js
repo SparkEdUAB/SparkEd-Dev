@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { _Notifications } from './notifications';
 import { Roles } from 'meteor/alanning:roles';
+import { _Notifications } from './notifications';
 
 Meteor.methods({
   insertNotification(title, category, unitId = '', topicId = '', fileId = '') {
@@ -12,7 +12,7 @@ Meteor.methods({
     check(category, String);
     if (Roles.userIsInRole(this.userId, ['admin', 'content-manager'])) {
       const testUsers = Meteor.users.find();
-      testUsers.map(usr => {
+      testUsers.map((usr) => { // eslint-disable-line
         const _id = new Meteor.Collection.ObjectID().valueOf();
         const userId = usr._id;
         // insert in Notifications
