@@ -80,6 +80,9 @@ globals:
   Picker: false
   test: false
   expect: false
+  beforeEach: false
+  describe: false
+  it: false
 settings:
   import/core-modules: [meteor/meteor]
   import/resolver: meteor

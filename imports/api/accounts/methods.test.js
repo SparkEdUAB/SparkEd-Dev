@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
+/* eslint-disable */
 import { Accounts } from 'meteor/accounts-base';
-import { chai, expect } from 'meteor/practicalmeteor:chai';
+import { expect } from 'meteor/practicalmeteor:chai';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 
 describe('Accounts', () => {
