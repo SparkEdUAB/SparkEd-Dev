@@ -22,7 +22,7 @@ env:
   browser: true
   node: true
   
-  
+parser: babel-eslint
 
 rules:
   # overwrite some rules  
@@ -78,6 +78,8 @@ globals:
   FlowRouter: false 
   moment: false 
   Picker: false
+  test: false
+  expect: false
 settings:
   import/core-modules: [meteor/meteor]
   import/resolver: meteor

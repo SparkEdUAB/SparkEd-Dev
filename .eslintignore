@@ -1,1 +1,3 @@
 packages
+imports/api/sync/syncFile.js
+imports/ui/components/Dashboard/Coursess.js
