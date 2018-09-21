@@ -1,8 +1,8 @@
-import { Mongo } from 'meteor/mongo';
+// eslint max-len: 0
+import { Mongo, MongoInternals } from 'meteor/mongo';
 // import SimpleSchema from 'simpl-schema';
 import { FilesCollection } from 'meteor/ostrio:files';
 import Grid from 'gridfs-stream';
-import { MongoInternals } from 'meteor/mongo';
 import fs from 'fs';
 
 let gfs;
@@ -27,7 +27,7 @@ export const Resources = new FilesCollection({
   },
   onAfterUpload(file) {
     // Move file to GridFS
-    Object.keys(file.versions).forEach(versionName => {
+    Object.keys(file.versions).forEach((versionName) => {
       const metadata = { versionName, fileId: file._id, storedAt: new Date() }; // Optional
       const writeStream = gfs.createWriteStream({ filename: file.name, metadata });
 
@@ -35,7 +35,7 @@ export const Resources = new FilesCollection({
 
       writeStream.on(
         'close',
-        Meteor.bindEnvironment(uploadedFile => {
+        Meteor.bindEnvironment((uploadedFile) => {
           const property = `versions.${versionName}.meta.gridFsFileId`;
           // If we store the ObjectID itself, Meteor (EJSON?) seems to convert it to a
           // LocalCollection.ObjectID, which GFS doesn't understand.
@@ -44,6 +44,7 @@ export const Resources = new FilesCollection({
               [property]: uploadedFile._id.toString(),
             },
           });
+          // eslint-disable-next-line
           this.unlink(this.collection.findOne(file._id.toString()), versionName); // Unlink file by version from FS
         }),
       );
@@ -53,7 +54,7 @@ export const Resources = new FilesCollection({
     const _id = (file.versions[versionName].meta || {}).gridFsFileId;
     if (_id) {
       const readStream = gfs.createReadStream({ _id });
-      readStream.on('error', err => {
+      readStream.on('error', (err) => {
         throw err;
       });
       readStream.pipe(http.response);
@@ -61,13 +62,14 @@ export const Resources = new FilesCollection({
     return Boolean(_id);
   },
   onAfterRemove(images) {
-    images.forEach(image => {
-      Object.keys(image.versions).forEach(versionName => {
+    images.forEach((image) => {
+      Object.keys(image.versions).forEach((versionName) => {
         const _id = (image.versions[versionName].meta || {}).gridFsFileId;
-        if (_id)
-          gfs.remove({ _id }, err => {
+        if (_id) {
+          gfs.remove({ _id }, (err) => {
             if (err) throw err;
           });
+        }
       });
     });
   },
@@ -91,7 +93,7 @@ export const References = new FilesCollection({
   },
   onAfterUpload(file) {
     // Move file to GridFS
-    Object.keys(file.versions).forEach(versionName => {
+    Object.keys(file.versions).forEach((versionName) => {
       const metadata = { versionName, fileId: file._id, storedAt: new Date() }; // Optional
       const writeStream = gfs.createWriteStream({ filename: file.name, metadata });
 
@@ -99,7 +101,7 @@ export const References = new FilesCollection({
 
       writeStream.on(
         'close',
-        Meteor.bindEnvironment(uploadedFile => {
+        Meteor.bindEnvironment((uploadedFile) => {
           const property = `versions.${versionName}.meta.gridFsFileId`;
 
           this.collection.update(file._id.toString(), {
@@ -107,6 +109,7 @@ export const References = new FilesCollection({
               [property]: uploadedFile._id.toString(),
             },
           });
+          // eslint-disable-next-line
           this.unlink(this.collection.findOne(file._id.toString()), versionName); // Unlink file by version from FS
         }),
       );
@@ -116,7 +119,7 @@ export const References = new FilesCollection({
     const _id = (file.versions[versionName].meta || {}).gridFsFileId;
     if (_id) {
       const readStream = gfs.createReadStream({ _id });
-      readStream.on('error', err => {
+      readStream.on('error', (err) => {
         throw err;
       });
       readStream.pipe(http.response);
@@ -124,13 +127,14 @@ export const References = new FilesCollection({
     return Boolean(_id);
   },
   onAfterRemove(files) {
-    files.forEach(file => {
-      Object.keys(file.versions).forEach(versionName => {
+    files.forEach((file) => {
+      Object.keys(file.versions).forEach((versionName) => {
         const _id = (file.versions[versionName].meta || {}).gridFsFileId;
-        if (_id)
-          gfs.remove({ _id }, err => {
+        if (_id) {
+          gfs.remove({ _id }, (err) => {
             if (err) throw err;
           });
+        }
       });
     });
   },

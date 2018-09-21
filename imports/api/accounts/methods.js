@@ -1,9 +1,10 @@
+
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
-  'user.insert': user => {
+  'user.insert': (user) => {
     check(user, {
       email: String,
       password: String,
@@ -11,7 +12,7 @@ Meteor.methods({
     });
     Accounts.createUser(user);
   },
-  'account.check': email => {
+  'account.check': (email) => {
     check(email, String);
     const initialUser = Meteor.users.findOne();
     const userId = initialUser._id;
@@ -28,7 +29,8 @@ Meteor.methods({
     // }
     return false;
   },
-  'user.approve'(id) {
+  // eslint-disable-next-line
+  'user.approve': function(id) {
     check(id, String);
     if (Roles.userIsInRole(this.userId, ['admin'])) {
       Meteor.users.update(
@@ -40,12 +42,14 @@ Meteor.methods({
             'profile.status': 1,
           },
         },
+        // eslint-disable-next-line
       );
     } else {
       throw new Meteor.Error('Sorry', "You don't have permissions to remove a user");
     }
   },
-  'user.suspend'(id) {
+  // eslint-disable-next-line
+  'user.suspend': function(id) {
     check(id, String);
     if (Roles.userIsInRole(this.userId, ['admin'])) {
       Meteor.users.update(
@@ -84,7 +88,8 @@ Meteor.methods({
       throw new Meteor.Error('Sorry', "You don't have permissions to remove a user");
     }
   },
-  'user.update'(id, namef) {
+  // eslint-disable-next-line
+  'user.update': function(id, namef) {
     check(id, String);
     check(namef, String);
     if (Roles.userIsInRole(this.userId, ['admin'])) {
@@ -102,7 +107,7 @@ Meteor.methods({
     return false;
   },
   // return the number of users
-  'num.users'() {
+  'num.users': () => {
     const users = Meteor.users.find().count();
     return users;
   },

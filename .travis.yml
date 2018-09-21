@@ -13,8 +13,6 @@ before_cache:
 before_install:
 # Remove cache if the project is upgraded to a newer version of meteor
 - export PATH="$HOME/.meteor:$PATH"
-# - tar xvf deploy.tar
-- npm install -g mup
 - curl https://install.meteor.com/?release=1.6.1.1 | /bin/sh
 
 branches:
@@ -22,5 +20,4 @@ only:
 - master
 
 script:
-#- npm test
-- mup deploy
+- npm run lint

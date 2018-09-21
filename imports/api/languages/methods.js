@@ -13,14 +13,6 @@ const getLanguages = new ValidatedMethod({
   },
 });
 
-// export const updateLanguage = new ValidatedMethod({
-//   name: 'language.update',
-//   validate: null,
-//   run({ id, language }) {
-//     return Language.update({ _id: '345345730' }, { $set: { language } }, { upsert: true });
-//   },
-// });
-
 Meteor.methods({
   updateLanguage(language) {
     check(language, String);

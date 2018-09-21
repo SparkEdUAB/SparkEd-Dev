@@ -24,7 +24,7 @@ Meteor.methods({
         isUserAuth: auth,
         isHighSchool: config.isHighSchool,
         isConfigured: true,
-        server
+        server,
       };
     } else {
       newConfig = {
@@ -33,17 +33,18 @@ Meteor.methods({
         isUserAuth: auth,
         isHighSchool,
         isConfigured: true,
-        server
+        server,
       };
     }
 
-    let title, subTitle;
+    let title,
+      subTitle;
     check(newConfig, Object);
 
     fs.writeFile(
       path,
       JSON.stringify(newConfig, null, 2),
-      Meteor.bindEnvironment(err => {
+      Meteor.bindEnvironment((err) => {
         if (err) {
           throw new Meteor.Error('something wrong happened', "Couldn't write to the file");
         }
@@ -55,7 +56,7 @@ Meteor.methods({
           title = 'Courses';
           subTitle = 'Units';
         }
-        Meteor.call('insert.title', title, subTitle, error => {
+        Meteor.call('insert.title', title, subTitle, (error) => {
           error ? console.err(error.reason) : console.log('Saved titles');
         });
       }),
